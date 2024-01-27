@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
 # This script creates the file /var/run/holbertonscript.pid containing PID
-# Trap signals
-trap 'echo "Y U no love me?!"' SIGINT
+# Trap SIGINT signal
+trap 'echo "Y U no love me?!"; cleanup' SIGINT
+
+# Trap SIGTERM signal
 trap 'echo "I hate the kill command"' SIGTERM
+
+# Function to perform cleanup
+cleanup() {
+    rm -f /var/run/myscript.pid
+    exit 0
+}
 
 # Create PID file
 echo $$ > /var/run/myscript.pid
@@ -13,8 +21,3 @@ while true; do
     sleep 1
 done
 
-# Delete PID file and terminate on SIGQUIT or SIGTERM signals
-trap 'rm -f /var/run/myscript.pid && exit' SIGQUIT SIGTERM
-
-# Ensure the script does not terminate prematurely
-sleep infinity
