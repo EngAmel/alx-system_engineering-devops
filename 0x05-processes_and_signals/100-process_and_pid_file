@@ -2,7 +2,7 @@
 # This script creates the file /var/run/holbertonscript.pid containing PID
 # Trap signals
 trap 'echo "Y U no love me?!"' SIGINT
-trap 'echo "I hate the kill command"' SIGTERM SIGQUIT
+trap 'echo "I hate the kill command"' SIGTERM
 
 # Create PID file
 echo $$ > /var/run/myscript.pid
@@ -13,3 +13,8 @@ while true; do
     sleep 1
 done
 
+# Delete PID file and terminate on SIGQUIT or SIGTERM signals
+trap 'rm -f /var/run/myscript.pid && exit' SIGQUIT SIGTERM
+
+# Ensure the script does not terminate prematurely
+sleep infinity
