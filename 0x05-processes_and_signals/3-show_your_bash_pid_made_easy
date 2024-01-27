@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 #script that displays the PID, along with the process name
-for pid_dir in /proc/*/; do
+for pid_dir in /proc/*/; 
+do
 pid=$(basename "$pid_dir")
 if [[ "$pid" =~ ^[0-9]+$ ]]; then
 command=$(cat "$pid_dir/cmdline" 2>/dev/null | tr '\0' ' ')
-if [[ "$command" == *"bash"* ]]; then
-echo "PID: $pid, Process Name: $command"
+if [[ "$command" == *"bash"* ]]; 
+then
+echo "$pid $command"
 fi
 fi
 done
