@@ -1,4 +1,5 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#script that displays the PID, along with the process name
 for pid_dir in /proc/*/; do
 pid=$(basename "$pid_dir")
 if [[ "$pid" =~ ^[0-9]+$ ]]; then
