@@ -1,14 +1,15 @@
 #!/usr/bin/env bash
 # This script creates the file /var/run/holbertonscript.pid containing PID
-function x() {
-    rm /var/run/myscript.pid
-    exit
-}
+# Trap signals
+trap 'echo "Y U no love me?!"' SIGINT
+trap 'echo "I hate the kill command"' SIGTERM SIGQUIT
 
-trap "echo I hate the kill command;love" SIGTERM
-trap "echo Y U no love me?!;love" SIGINT
+# Create PID file
+echo $$ > /var/run/myscript.pid
 
-echo $$ >> /var/run/myscript.pid
-while [ true ]; do
-    echo To infinity and beyond;
+# Display messages indefinitely
+while true; do
+    echo "To infinity and beyond"
+    sleep 1
 done
+
